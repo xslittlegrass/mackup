@@ -45,6 +45,14 @@ values."
      version-control
      osx
      python
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     syntax-checking
+     (c-c++
+      :variables
+      c-c++-default-mode-for-headers 'c++-mode)
+     gtags
      ;; markdown
      ;; org
      ;; (shell :variables
@@ -304,6 +312,37 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;; Cursor
+  (defun dired-move-to-first-file ()
+    "Move cursor to first file of dired."
+    (interactive)
+    (goto-char (point-min))
+    (while (not (dired-move-to-filename))
+      (call-interactively 'dired-next-line)))
+
+  ;; UI
+  (xterm-mouse-mode 0)
+  (golden-ratio-mode 1)
+  (setq ns-use-srgb-colorspace nil)
+  (setq python-fill-column 99)
+  (setq org-export-with-sub-superscripts nil)
+  (setq dotspacemacs-mode-line-unicode-symbols nil)
+  (add-hook 'doc-viewsmode-hook 'auto-revert-mode)
+  (setq powerline-default-separator nil)
+
+  ;; shortcuts
+  (evil-leader/set-key
+    ;; "rs" 'replace-string
+    ;; "dr" 'desktop-read
+    "odh" 'dired-move-to-first-file
+    ;; "oe" 'cdlatex-environment
+    ;; "op" 'org-toggle-pretty-entities
+    ;; "ot" 'org-insert-todo-heading
+    ;; "om" 'org-agenda-month-view
+    ;; "di" 'indent-region
+    ;; "oy" 'youdao-dictionary-search-at-point
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -315,7 +354,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yapfify reveal-in-osx-finder pyvenv pytest pyenv-mode py-isort pip-requirements pbcopy osx-trash osx-dictionary mwim live-py-mode launchctl hy-mode helm-pydoc helm-company helm-c-yasnippet cython-mode company-statistics company-anaconda company auto-yasnippet yasnippet anaconda-mode pythonic ac-ispell auto-complete smeargle orgit org magit-gitflow magit-gh-pulls helm-gitignore gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht evil-magit magit magit-popup git-commit with-editor diff-hl ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))))
+    (xterm-color shell-pop multi-term helm-gtags ggtags flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help disaster company-c-headers cmake-mode clang-format yapfify reveal-in-osx-finder pyvenv pytest pyenv-mode py-isort pip-requirements pbcopy osx-trash osx-dictionary mwim live-py-mode launchctl hy-mode helm-pydoc helm-company helm-c-yasnippet cython-mode company-statistics company-anaconda company auto-yasnippet yasnippet anaconda-mode pythonic ac-ispell auto-complete smeargle orgit org magit-gitflow magit-gh-pulls helm-gitignore gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht evil-magit magit magit-popup git-commit with-editor diff-hl ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
